@@ -1,3 +1,4 @@
+#!url=https://raw.githubusercontent.com/smithwhere/YouTubeAds/main/Shadowrocket/Module/youtube.sgmodule
 #!name=youtube
 #!desc=仅用于视频广告
 
@@ -8,11 +9,13 @@
 ^https?:\/\/(www|s)\.youtube\.com\/api\/stats\/ads - reject
 ^https?:\/\/(www|s)\.youtube\.com\/(pagead|ptracking) - reject
 ^https?:\/\/s\.youtube\.com\/api\/stats\/qoe\?adcontext - reject
+^https?:\/\/[\w-]+\.googlevideo\.com\/initplayback.+&oad url reject-img
+
 [Script]
 youtube = type=http-response,pattern=^https:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/(browse|next|player|search|reel\/reel_watch_sequence|guide|account\/get_setting)\?,requires-body=1,binary-body-mode=1,max-size=3145728,script-path=https://raw.githubusercontent.com/smithwhere/sgmodule/master/Script/Youtube/dist/youtube.js
+
 [Map Local]
 ^https?:\/\/[\w-]+\.googlevideo\.com\/initplayback.+&oad data="https://raw.githubusercontent.com/smithwhere/sgmodule/master/Script/Youtube/dist/blank.txt" header="Content-Type: application/vnd.yt-ump"
-[URL Rewrite]
-^https?:\/\/[\w-]+\.googlevideo\.com\/initplayback.+&oad url reject-img
+
 [MITM]
 hostname = %APPEND% -redirector*.googlevideo.com,*.googlevideo.com,www.youtube.com,s.youtube.com,youtubei.googleapis.com
